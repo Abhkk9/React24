@@ -7,3 +7,5 @@ const store = configureStore({
         // add more slices here for posts
     }
 });
+
+export default store;

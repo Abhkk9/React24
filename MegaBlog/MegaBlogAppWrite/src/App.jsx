@@ -1,11 +1,11 @@
 import '/src/conf/conf.js';
 import './App.css';
 import authService from "./appwrite/auth";
-import {login,  logOut} from "./store/authSlice";
+import {login,  logout} from "./store/authSlice";
 import { useState,useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-// import { Footer,Header } from './components';
+import { Footer,Header } from './components';
 
 function App() {
   const [loading, setLoading]= useState(true);
@@ -18,25 +18,23 @@ function App() {
         dispatch(login({userData}) )
       }
       else{
-        dispatch(logOut())
+        dispatch(logout())
       }
     })
     .finally( () =>setLoading(false))
   },[])
 
   return !loading?(
-    <div className='min-h-screen flex flex-wrap '>
-      <h1> A REACT APP WITH APPWRITE</h1>
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
       <div className='w-full block'>
-      {/* <Header/> */}
-      <main>
-        {/* <Outlet /> */}
-        <h1>main</h1>
-      </main>
-      {/* <Footer /> */}
+        <Header />
+        <main>
+        TODO:  <Outlet />
+        </main>
+        <Footer />
       </div>
     </div>
-  ):(<div>default</div>)  
+  ) : null
 }
 
 export default App

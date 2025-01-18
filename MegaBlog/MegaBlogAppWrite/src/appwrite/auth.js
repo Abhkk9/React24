@@ -25,14 +25,16 @@ export  class AuthService{
                  return userAccount;
             }
         }catch(error){
+            console.log("Appwrite service :CREATE User failed:",error);
             throw error;
         }
     }
     async login({email, password}) {
         try{
-            await this.account.createSession(email, password);
+           return await this.account.createEmailPasswordSession(email, password);
         }
         catch(error){
+            console.log("Appwrite service :Login failed:",error);
             throw error;
         }
     }
@@ -40,17 +42,17 @@ export  class AuthService{
     async getCurrentUser(){
         
         try{
-           return this.account.get();
+           return await this.account.get();
             
         }
         catch(error){
-            console.log("Appwrite service : :",error);
+            console.log("Appwrite service :getCurrentUser failed:",error);
         }
         return null;
     }
     async logout(){
         try{
-            return this.account.deleteSession();
+            await this.account.deleteSessions();
              
          }
          catch(error){
